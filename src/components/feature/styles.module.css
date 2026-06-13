@@ -1,0 +1,24 @@
+.feature__icon {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.feature__title {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.feature__description {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
+}
+
+/* si prefer color  */
+@media (prefers-color-scheme: dark) {
+  .feature__icon {
+    filter: invert(1);
+  }
+}

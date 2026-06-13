@@ -25,10 +25,10 @@
 @import "3_components/header-main.css" layer(components);
 /* @import "3_components/header-actions.css" layer(components); */
 /* @import "3_components/main-nav.css" layer(components); */
-@import "3_components/categories.css" layer(components);
-@import "3_components/category.css" layer(components);
-@import "3_components/features.css" layer(components);
-@import "3_components/hero.css" layer(components);
+/* @import "3_components/categories.css" layer(components); */
+/* @import "3_components/category.css" layer(components); */
+/* @import "3_components/features.css" layer(components); */
+/* @import "3_components/hero.css" layer(components); */
 @import "3_components/category-header.css" layer(components);
 @import "3_components/products.css" layer(components);
 @import "3_components/price-filter.css" layer(components);
