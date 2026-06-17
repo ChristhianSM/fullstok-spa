@@ -1,0 +1,1 @@
+export const GET_CATEGORIES_URL = "http://localhost:3000/api/categories";
