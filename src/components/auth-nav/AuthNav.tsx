@@ -1,3 +1,4 @@
+import { Container } from "../ui";
 import styles from "./styles.module.css";
 
 type AuthNavProps = {
@@ -7,7 +8,7 @@ type AuthNavProps = {
 export const AuthNav = ({ user }: AuthNavProps) => {
   return (
     <div className={styles["auth-nav"]}>
-      <div className={`container ${styles["auth-nav__container"]}`}>
+      <Container className={styles["auth-nav__container"]}>
         <nav aria-label="Autenticación de usuario">
           <ul className={styles["auth-nav__list"]}>
             {user ? (
@@ -42,7 +43,7 @@ export const AuthNav = ({ user }: AuthNavProps) => {
             )}
           </ul>
         </nav>
-      </div>
+      </Container>
     </div>
   );
 };

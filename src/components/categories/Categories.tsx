@@ -1,6 +1,7 @@
 import Category from "../category";
 import type { Category as CategoryType } from "../../types";
 import styles from "./styles.module.css";
+import { Container } from "../ui";
 
 type CategoriesProps = {
   categories: CategoryType[];
@@ -9,7 +10,7 @@ type CategoriesProps = {
 export const Categories = ({ categories }: CategoriesProps) => {
   return (
     <section className={styles["categories"]}>
-      <div className="container">
+      <Container>
         <div className={styles["categories__header"]}>
           <h2 className={styles["categories__title"]}>Compra por categoría</h2>
           <p className={styles["categories__description"]}>
@@ -25,7 +26,7 @@ export const Categories = ({ categories }: CategoriesProps) => {
             return <Category key={category.id} category={category} />;
           })}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

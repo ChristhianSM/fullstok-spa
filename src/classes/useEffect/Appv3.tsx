@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pokemon } from "./Pokemon";
+import { Pokemon } from "../useEffect/Pokemon";
 
 const ENDPOINT = "https://test-api-codeable.up.railway.app/api/pokemons";
 

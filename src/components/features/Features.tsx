@@ -1,4 +1,5 @@
 import Feature from "../feature";
+import { Container } from "../ui";
 import styles from "./styles.module.css";
 
 export type Feature = {
@@ -42,7 +43,7 @@ const features: Feature[] = [
 export const Features = () => {
   return (
     <section className={styles["features"]}>
-      <div className="container">
+      <Container>
         <h2 className={styles["features__title"]}>
           Nuestra Promesa de Calidad
         </h2>
@@ -51,7 +52,7 @@ export const Features = () => {
             <Feature key={feature.id} feature={feature} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

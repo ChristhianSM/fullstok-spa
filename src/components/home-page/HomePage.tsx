@@ -6,6 +6,7 @@ import Features from "../features";
 import Hero from "../hero";
 import type { Category } from "../../types";
 import { GET_CATEGORIES_URL } from "../../config";
+import { Container } from "../ui";
 
 export const HomePage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -36,7 +37,7 @@ export const HomePage = () => {
       {status === "loading" && <p>Loading ....</p>}
       {status === "error" && (
         <section className={styles["categories-error"]}>
-          <div className="container">
+          <Container>
             <h2 className={styles["categories-error__title"]}>
               Algo salió mal
             </h2>
@@ -44,7 +45,7 @@ export const HomePage = () => {
               No pudimos cargar las categorías. Por favor, intenta recargar la
               página.
             </p>
-          </div>
+          </Container>
         </section>
       )}
       {status === "success" && <Categories categories={categories} />}
