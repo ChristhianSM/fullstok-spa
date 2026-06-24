@@ -1,5 +1,6 @@
 import HeaderActions from "../header-actions";
 import MainNav from "../main-nav";
+import { Container, Separator } from "../ui";
 import styles from "./styles.module.css";
 
 type HeaderMainProps = {
@@ -8,7 +9,7 @@ type HeaderMainProps = {
 
 export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
   return (
-    <div className={`container ${styles["header-main"]}`}>
+    <Container className={styles["header-main"]}>
       <div className={styles["header-main__top"]}>
         <a href="/">
           <img
@@ -20,9 +21,9 @@ export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
         </a>
         <HeaderActions cartItemsCount={cartItemsCount} />
       </div>
-      <div className={`separator ${styles["header-main__separator"]}`}></div>
+      <Separator className={styles["header-main__separator"]} />
       <MainNav />
-    </div>
+    </Container>
   );
 };
 

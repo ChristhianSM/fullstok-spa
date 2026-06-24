@@ -1,4 +1,4 @@
-import { Container } from "../ui";
+import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
 
 type AuthNavProps = {
@@ -18,12 +18,12 @@ export const AuthNav = ({ user }: AuthNavProps) => {
                 </li>
                 <li className={styles["auth-nav__item"]}>
                   <form action="/logout" method="POST">
-                    <button
-                      className={`button button--ghost ${styles["auth-nav__button"]}
-                      `}
+                    <Button
+                      variant="ghost"
+                      className={styles["auth-nav__button"]}
                     >
                       Cerrar sesión
-                    </button>
+                    </Button>
                   </form>
                 </li>
               </>

@@ -1,3 +1,4 @@
+import { ButtonLink } from "../ui";
 import styles from "./styles.module.css";
 
 type HeaderMainProps = {
@@ -7,9 +8,11 @@ type HeaderMainProps = {
 export const HeaderActions = ({ cartItemsCount }: HeaderMainProps) => {
   return (
     <div className={styles["header-actions"]}>
-      <a
+      <ButtonLink
         href="/cart"
-        className={`button button--ghost button--xl-icon  ${styles["header-actions__cart"]}`}
+        variant="ghost"
+        size="xl-icon"
+        className={styles["header-actions__cart"]}
         aria-label="Carrito de compras"
       >
         <img
@@ -22,7 +25,7 @@ export const HeaderActions = ({ cartItemsCount }: HeaderMainProps) => {
             {cartItemsCount}
           </span>
         )}
-      </a>
+      </ButtonLink>
     </div>
   );
 };

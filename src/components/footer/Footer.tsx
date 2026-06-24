@@ -1,4 +1,4 @@
-import { Container } from "../ui";
+import { Button, Container, Section, Separator } from "../ui";
 import styles from "./styles.module.css";
 
 type FooterProps = {
@@ -9,7 +9,7 @@ export const Footer = ({ className }: FooterProps) => {
   return (
     <footer className={className}>
       <Container>
-        <section className={`section ${styles["footer__section"]}`}>
+        <Section className={styles["footer__section"]}>
           <div className={styles["footer__links"]}>
             <ul role="list" className={styles["footer__list"]}>
               <li className={styles["footer__title"]}>Tienda</li>
@@ -70,16 +70,13 @@ export const Footer = ({ className }: FooterProps) => {
                 placeholder="ejemplo@mail.com"
                 autoComplete="email"
               />
-              <button
-                className="button button--lg button--secondary"
-                type="submit"
-              >
+              <Button variant="secondary" size="lg" type="submit">
                 Suscribirse
-              </button>
+              </Button>
             </form>
           </div>
-        </section>
-        <div className="separator"></div>
+        </Section>
+        <Separator />
         <small className={styles["footer__copyright"]}>
           Todos los derechos reservados © Full Stock
         </small>

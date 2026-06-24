@@ -8,13 +8,13 @@
 @import "1_foundation/global.css" layer(global);
 
 /* 2 Layouts */
-@import "2_layouts/container.css" layer(layouts);
-@import "2_layouts/section.css" layer(layouts);
+/* @import "2_layouts/container.css" layer(layouts); */
+/* @import "2_layouts/section.css" layer(layouts); */
 
 /* 3 Components */
 /* UI */
-@import "3_components/button.css" layer(components);
-@import "3_components/separator.css" layer(components);
+/* @import "3_components/button.css" layer(components); */
+/* @import "3_components/separator.css" layer(components); */
 @import "3_components/input-field.css" layer(components);
 
 /* Routes */

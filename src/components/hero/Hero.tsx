@@ -1,4 +1,4 @@
-import { Container } from "../ui";
+import { ButtonLink, Container } from "../ui";
 import styles from "./styles.module.css";
 
 export const Hero = () => {
@@ -11,12 +11,14 @@ export const Hero = () => {
           <br />
           Agrega tus favoritos al carrito antes que se agoten.
         </p>
-        <a href="/categories/polos" className="button button--xl">
+        <ButtonLink size="xl" href="/categories/polos">
           Compra ahora
-        </a>
+        </ButtonLink>
       </Container>
     </section>
   );
 };
+
+// className="button button--xl"
 
 export default Hero;
