@@ -2,10 +2,18 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 import { type ComponentPropsWithRef } from "react";
 
-type PropsButton = ComponentPropsWithRef<"button"> & {
+type PropsBaseButton = {
   variant?: "secondary" | "outline" | "ghost";
   size?: "sm" | "lg" | "xl" | "sm-icon" | "icon" | "lg-icon" | "xl-icon";
 };
+
+type ButtonAsButtonProps = PropsBaseButton &
+  ComponentPropsWithRef<"button"> & { href?: never };
+
+type ButtonAsLinkProps = PropsBaseButton &
+  ComponentPropsWithRef<"a"> & { href: string };
+
+type PropsButton = ButtonAsButtonProps | ButtonAsLinkProps;
 
 export const Button = ({
   variant,
@@ -19,6 +27,11 @@ export const Button = ({
     size && styles[`button--${size}`],
     className,
   );
+
+  if (typeof delegated.href === "string") {
+    return <a className={buttonClassName} {...delegated}></a>;
+  }
+
   return <button className={buttonClassName} {...delegated} />;
 };
 

@@ -1,4 +1,4 @@
-import { ButtonLink } from "../ui";
+import { Button } from "../ui";
 import styles from "./styles.module.css";
 
 type HeaderMainProps = {
@@ -8,7 +8,7 @@ type HeaderMainProps = {
 export const HeaderActions = ({ cartItemsCount }: HeaderMainProps) => {
   return (
     <div className={styles["header-actions"]}>
-      <ButtonLink
+      <Button
         href="/cart"
         variant="ghost"
         size="xl-icon"
@@ -25,7 +25,7 @@ export const HeaderActions = ({ cartItemsCount }: HeaderMainProps) => {
             {cartItemsCount}
           </span>
         )}
-      </ButtonLink>
+      </Button>
     </div>
   );
 };

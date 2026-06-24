@@ -8,7 +8,7 @@ type FooterProps = {
 export const Footer = ({ className }: FooterProps) => {
   return (
     <footer className={className}>
-      <Container>
+      <Container as="div">
         <Section className={styles["footer__section"]}>
           <div className={styles["footer__links"]}>
             <ul role="list" className={styles["footer__list"]}>
