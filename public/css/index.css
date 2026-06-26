@@ -29,10 +29,10 @@
 /* @import "3_components/category.css" layer(components); */
 /* @import "3_components/features.css" layer(components); */
 /* @import "3_components/hero.css" layer(components); */
-@import "3_components/category-header.css" layer(components);
-@import "3_components/products.css" layer(components);
-@import "3_components/price-filter.css" layer(components);
-@import "3_components/product-card.css" layer(components);
+/* @import "3_components/category-header.css" layer(components); */
+/* @import "3_components/products.css" layer(components); */
+/* @import "3_components/price-filter.css" layer(components); */
+/* @import "3_components/product-card.css" layer(components); */
 @import "3_components/product.css" layer(components);
 @import "3_components/cart.css" layer(components);
 @import "3_components/checkout.css" layer(components);

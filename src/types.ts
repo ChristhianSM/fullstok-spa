@@ -8,3 +8,16 @@ export type Category = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Product = {
+  id: number;
+  title: string;
+  slug: string;
+  imgSrc: string;
+  price: number;
+  description: string;
+  features: string[];
+  categoryId: number;
+  createdAt: Date;
+  updatedAt: Date;
+};

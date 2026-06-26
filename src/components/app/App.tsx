@@ -1,3 +1,4 @@
+import CategoryPage from "../category-page";
 import Footer from "../footer";
 import Header from "../header";
 import HomePage from "../home-page";
@@ -12,7 +13,8 @@ function App() {
         className={styles["root__header"]}
       />
       <main className="root__main">
-        <HomePage />
+        {/* <HomePage /> */}
+        <CategoryPage />
       </main>
       <Footer className={styles["root__footer"]} />
     </div>
