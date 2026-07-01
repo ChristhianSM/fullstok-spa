@@ -14,7 +14,7 @@ function App() {
       />
       <main className="root__main">
         {/* <HomePage /> */}
-        <CategoryPage />
+        <CategoryPage categorySlug="tazas" />
       </main>
       <Footer className={styles["root__footer"]} />
     </div>

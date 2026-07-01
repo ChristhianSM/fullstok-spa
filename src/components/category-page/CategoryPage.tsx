@@ -1,35 +1,74 @@
-import type { Product } from "../../types";
+import { useEffect, useState } from "react";
+import type { Category, Product } from "../../types";
 import PriceFilter from "../price-filter";
 import ProductCard from "../product-card/ProductCard";
 import { Container } from "../ui";
 import styles from "./styles.module.css";
+import { BASE_URL } from "../../config";
 
-const product: Product = {
-  id: 12,
-  title: "Camisa",
-  description: "Camisa muy bonita",
-  categoryId: 10,
-  features: ["Azul", "Manga Corta"],
-  price: 1000,
-  slug: "camisa-corta",
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  imgSrc:
-    "https://media.istockphoto.com/id/1328049157/es/foto/maqueta-de-camiseta-de-manga-corta-para-hombres-en-las-vistas-delantera-y-trasera.jpg?s=612x612&w=0&k=20&c=aRwBbk641RUa4KTMWTNh6HgaYQoKjCVNJSeUZAN7Bwg=",
+type CategoryProps = {
+  categorySlug: string;
 };
 
-export const CategoryPage = () => {
+export const CategoryPage = ({ categorySlug }: CategoryProps) => {
+  const [category, setCategory] = useState<Category | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [status, setStatus] = useState<"loading" | "success" | "error">(
+    "loading",
+  );
+
+  useEffect(() => {
+    async function runEffect() {
+      try {
+        const [categoryResponse, productsResponse] = await Promise.all([
+          fetch(`${BASE_URL}/categories/${categorySlug}`),
+          fetch(`${BASE_URL}/categories/${categorySlug}/products`),
+        ]);
+
+        const bodyCategory = await categoryResponse.json();
+        const bodyProducts = await productsResponse.json();
+
+        if (!categoryResponse.ok) throw new Error(bodyCategory.error);
+        if (!productsResponse.ok) throw new Error(bodyProducts.error);
+
+        setCategory(bodyCategory.data);
+        setProducts(bodyProducts.data);
+        setStatus("success");
+      } catch (error) {
+        console.log(error);
+        setStatus("error");
+      }
+    }
+
+    runEffect();
+  }, [categorySlug]);
+
+  if (status === "error") {
+    return (
+      <section className={styles["category-page-error"]}>
+        <Container>
+          <p className={styles["category-page-error__message"]}>
+            Algo salio mal. Por favor Intente recargar la pagina
+          </p>
+        </Container>
+      </section>
+    );
+  }
+
+  if (status === "loading") {
+    return <p>Cargando datos.....</p>;
+  }
   return (
     <>
       <section className={styles["category-header"]}>
         <Container>
           <div className={styles["category-header__content"]}>
             <h1 className={styles["category-header__title"]}>
-              Nombre de Categoria
+              {category?.title}
             </h1>
             {/* TODO */}
             <p className={styles["category-header__description"]}>
-              Description de la Categoria
+              {category?.description}
             </p>
           </div>
         </Container>
@@ -40,11 +79,14 @@ export const CategoryPage = () => {
           <div className={styles["products__layout"]}>
             <PriceFilter className={styles["products__price-filter"]} />
             <div className={styles["products__grid"]}>
-              <ProductCard product={product} />
-              <ProductCard product={product} />
-              <ProductCard product={product} />
-              <ProductCard product={product} />
-              <ProductCard product={product} />
+              {products.length > 0 ? (
+                products.map((product) => {
+                  return <ProductCard key={product.id} product={product} />;
+                })
+              ) : (
+                <p>No hay productos que mostrar</p>
+              )}
+              {}
             </div>
           </div>
         </Container>

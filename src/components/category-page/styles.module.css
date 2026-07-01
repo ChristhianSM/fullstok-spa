@@ -54,3 +54,13 @@
     max-width: 20rem;
   }
 }
+
+
+.category-page-error {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.category-page-error__message {
+  color: var(--error);
+}
