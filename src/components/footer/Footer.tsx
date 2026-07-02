@@ -3,9 +3,14 @@ import styles from "./styles.module.css";
 
 type FooterProps = {
   className?: string;
+  navigate: (to: string) => void;
 };
 
-export const Footer = ({ className }: FooterProps) => {
+export const Footer = ({ className, navigate }: FooterProps) => {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+    navigate(event.currentTarget.getAttribute("href")!);
+  }
   return (
     <footer className={className}>
       <Container as="div">
@@ -14,13 +19,19 @@ export const Footer = ({ className }: FooterProps) => {
             <ul role="list" className={styles["footer__list"]}>
               <li className={styles["footer__title"]}>Tienda</li>
               <li>
-                <a href="/categories/polos">Polos</a>
+                <a href="/categories/polos" onClick={handleClick}>
+                  Polos
+                </a>
               </li>
               <li>
-                <a href="/categories/tazas">Tazas</a>
+                <a href="/categories/tazas" onClick={handleClick}>
+                  Tazas
+                </a>
               </li>
               <li>
-                <a href="/categories/stickers">Stickers</a>
+                <a href="/categories/stickers" onClick={handleClick}>
+                  Stickers
+                </a>
               </li>
             </ul>
             <ul role="list" className={styles["footer__list"]}>

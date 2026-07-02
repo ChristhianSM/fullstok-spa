@@ -5,13 +5,19 @@ import styles from "./styles.module.css";
 
 type HeaderMainProps = {
   cartItemsCount: number;
+  navigate: (to: string) => void;
 };
 
-export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
+export const HeaderMain = ({ cartItemsCount, navigate }: HeaderMainProps) => {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+    navigate(event.currentTarget.getAttribute("href")!);
+  }
+
   return (
     <Container className={styles["header-main"]}>
       <div className={styles["header-main__top"]}>
-        <a href="/">
+        <a href="/" onClick={handleClick}>
           <img
             src="/images/fullstock-logo.svg"
             alt="FullStock inicio"
@@ -22,7 +28,7 @@ export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
         <HeaderActions cartItemsCount={cartItemsCount} />
       </div>
       <Separator className={styles["header-main__separator"]} />
-      <MainNav />
+      <MainNav navigate={navigate} />
     </Container>
   );
 };

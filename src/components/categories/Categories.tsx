@@ -5,9 +5,10 @@ import { Container } from "../ui";
 
 type CategoriesProps = {
   categories: CategoryType[];
+  navigate: (to: string) => void;
 };
 
-export const Categories = ({ categories }: CategoriesProps) => {
+export const Categories = ({ categories, navigate }: CategoriesProps) => {
   return (
     <section className={styles["categories"]}>
       <Container>
@@ -23,7 +24,13 @@ export const Categories = ({ categories }: CategoriesProps) => {
         </div>
         <div className={styles["categories__grid"]}>
           {categories.map((category) => {
-            return <Category key={category.id} category={category} />;
+            return (
+              <Category
+                key={category.id}
+                category={category}
+                navigate={navigate}
+              />
+            );
           })}
         </div>
       </Container>

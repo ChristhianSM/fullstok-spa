@@ -1,7 +1,16 @@
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
 
-export const Hero = () => {
+type HeroProps = {
+  navigate: (to: string) => void;
+};
+
+export const Hero = ({ navigate }: HeroProps) => {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+    navigate(event.currentTarget.getAttribute("href")!);
+  }
+
   return (
     <section className={styles["hero"]}>
       <Container size="sm" className={styles["hero__container"]}>
@@ -11,7 +20,7 @@ export const Hero = () => {
           <br />
           Agrega tus favoritos al carrito antes que se agoten.
         </p>
-        <Button size="xl" href="/categories/polos">
+        <Button size="xl" href="/categories/polos" onClick={handleClick}>
           Compra ahora
         </Button>
       </Container>
