@@ -4,11 +4,10 @@ import Header from "../header";
 import HomePage from "../home-page";
 import styles from "./styles.module.css";
 import { Container } from "../ui";
-import { useContext } from "react";
-import { RouterContext } from "../router-provider";
+import { useLocation } from "../router-provider";
 
 function App() {
-  const { path } = useContext(RouterContext)!;
+  const path = useLocation();
 
   let page;
   if (path === "/") {

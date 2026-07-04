@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import type { Category as CategoryType } from "../../types";
 import styles from "./styles.module.css";
-import { RouterContext } from "../router-provider";
+import { useNavigation } from "../router-provider";
 
 type CategoryProps = {
   category: CategoryType;
@@ -9,7 +8,7 @@ type CategoryProps = {
 
 export const Category = ({ category }: CategoryProps) => {
   const { slug, title, description, imgSrc, alt } = category;
-  const { navigate } = useContext(RouterContext)!;
+  const navigate = useNavigation();
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
