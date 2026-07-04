@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
 import CategoryPage from "../category-page";
 import Footer from "../footer";
 import Header from "../header";
 import HomePage from "../home-page";
 import styles from "./styles.module.css";
 import { Container } from "../ui";
+import { useContext } from "react";
+import { RouterContext } from "../router-provider";
 
 function App() {
-  const [path, setPath] = useState(window.location.pathname);
-
-  useEffect(() => {
-    function handlePopState() {
-      setPath(window.location.pathname);
-    }
-
-    window.addEventListener("popstate", handlePopState);
-
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  function navigate(to: string) {
-    window.history.pushState(null, "", to);
-    setPath(to);
-  }
+  const { path } = useContext(RouterContext)!;
 
   let page;
   if (path === "/") {
-    page = <HomePage navigate={navigate} />;
+    page = <HomePage />;
   } else if (path.startsWith("/categories/")) {
     const slug = path.replace("/categories/", "");
     page = <CategoryPage categorySlug={slug} />;
@@ -44,10 +30,9 @@ function App() {
         user={{ email: "Christhian" }}
         cartItemsCount={10}
         className={styles["root__header"]}
-        navigate={navigate}
       />
       <main className="root__main">{page}</main>
-      <Footer className={styles["root__footer"]} navigate={navigate} />
+      <Footer className={styles["root__footer"]} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
+import { useContext } from "react";
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
+import { RouterContext } from "../router-provider";
 
-type HeroProps = {
-  navigate: (to: string) => void;
-};
+export const Hero = () => {
+  const { navigate } = useContext(RouterContext)!;
 
-export const Hero = ({ navigate }: HeroProps) => {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
     navigate(event.currentTarget.getAttribute("href")!);

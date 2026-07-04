@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import HeaderActions from "../header-actions";
 import MainNav from "../main-nav";
 import { Container, Separator } from "../ui";
 import styles from "./styles.module.css";
+import { RouterContext } from "../router-provider";
 
 type HeaderMainProps = {
   cartItemsCount: number;
-  navigate: (to: string) => void;
 };
 
-export const HeaderMain = ({ cartItemsCount, navigate }: HeaderMainProps) => {
+export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
+  const { navigate } = useContext(RouterContext)!;
+
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
     navigate(event.currentTarget.getAttribute("href")!);

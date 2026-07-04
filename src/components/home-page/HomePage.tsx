@@ -8,11 +8,7 @@ import type { Category } from "../../types";
 import { GET_CATEGORIES_URL } from "../../config";
 import { Container } from "../ui";
 
-type HomePageProps = {
-  navigate: (to: string) => void;
-};
-
-export const HomePage = ({ navigate }: HomePageProps) => {
+export const HomePage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -37,7 +33,7 @@ export const HomePage = ({ navigate }: HomePageProps) => {
 
   return (
     <>
-      <Hero navigate={navigate} />
+      <Hero />
       {status === "loading" && <p>Loading ....</p>}
       {status === "error" && (
         <section className={styles["categories-error"]}>
@@ -52,9 +48,7 @@ export const HomePage = ({ navigate }: HomePageProps) => {
           </Container>
         </section>
       )}
-      {status === "success" && (
-        <Categories categories={categories} navigate={navigate} />
-      )}
+      {status === "success" && <Categories categories={categories} />}
       <Features />
     </>
   );

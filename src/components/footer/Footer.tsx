@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import { Button, Container, Section, Separator } from "../ui";
 import styles from "./styles.module.css";
+import { RouterContext } from "../router-provider";
 
 type FooterProps = {
   className?: string;
-  navigate: (to: string) => void;
 };
 
-export const Footer = ({ className, navigate }: FooterProps) => {
+export const Footer = ({ className }: FooterProps) => {
+  const { navigate } = useContext(RouterContext)!;
+
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
     navigate(event.currentTarget.getAttribute("href")!);
