@@ -1,36 +1,29 @@
+import { Link } from "react-router";
 import HeaderActions from "../header-actions";
 import MainNav from "../main-nav";
 import { Container, Separator } from "../ui";
 import styles from "./styles.module.css";
-import { useNavigation } from "../router-provider";
 
 type HeaderMainProps = {
   cartItemsCount: number;
 };
 
 export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
-  const navigate = useNavigation();
-
-  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    event.preventDefault();
-    navigate(event.currentTarget.getAttribute("href")!);
-  }
-
   return (
     <Container className={styles["header-main"]}>
       <div className={styles["header-main__top"]}>
-        <a href="/" onClick={handleClick}>
+        <Link to="/" role="logo">
           <img
             src="/images/fullstock-logo.svg"
             alt="FullStock inicio"
             width="128"
             height="32"
           />
-        </a>
+        </Link>
         <HeaderActions cartItemsCount={cartItemsCount} />
       </div>
       <Separator className={styles["header-main__separator"]} />
-      <MainNav navigate={navigate} />
+      <MainNav />
     </Container>
   );
 };

@@ -1,18 +1,12 @@
 import { Button, Container, Section, Separator } from "../ui";
 import styles from "./styles.module.css";
-import { useNavigation } from "../router-provider";
+import { Link } from "react-router";
 
 type FooterProps = {
   className?: string;
 };
 
 export const Footer = ({ className }: FooterProps) => {
-  const navigate = useNavigation();
-
-  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    event.preventDefault();
-    navigate(event.currentTarget.getAttribute("href")!);
-  }
   return (
     <footer className={className}>
       <Container as="div">
@@ -21,31 +15,25 @@ export const Footer = ({ className }: FooterProps) => {
             <ul role="list" className={styles["footer__list"]}>
               <li className={styles["footer__title"]}>Tienda</li>
               <li>
-                <a href="/categories/polos" onClick={handleClick}>
-                  Polos
-                </a>
+                <Link to="/categories/polos">Polos</Link>
               </li>
               <li>
-                <a href="/categories/tazas" onClick={handleClick}>
-                  Tazas
-                </a>
+                <Link to="/categories/tazas">Tazas</Link>
               </li>
               <li>
-                <a href="/categories/stickers" onClick={handleClick}>
-                  Stickers
-                </a>
+                <Link to="/categories/stickers">Stickers</Link>
               </li>
             </ul>
             <ul role="list" className={styles["footer__list"]}>
               <li className={styles["footer__title"]}>Compañía</li>
               <li>
-                <a href="/about">Quienes somos</a>
+                <Link to="/about">Quienes somos</Link>
               </li>
               <li>
-                <a href="/terms">Términos y condiciones</a>
+                <Link to="/terms">Términos y condiciones</Link>
               </li>
               <li>
-                <a href="/privacy">Privacidad</a>
+                <Link to="/privacy">Privacidad</Link>
               </li>
             </ul>
             <ul role="list" className={styles["footer__list"]}>

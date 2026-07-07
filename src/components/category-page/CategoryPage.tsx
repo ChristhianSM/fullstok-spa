@@ -5,12 +5,10 @@ import ProductCard from "../product-card/ProductCard";
 import { Container } from "../ui";
 import styles from "./styles.module.css";
 import { BASE_URL } from "../../config";
+import { useParams } from "react-router";
 
-type CategoryProps = {
-  categorySlug: string;
-};
-
-export const CategoryPage = ({ categorySlug }: CategoryProps) => {
+export const CategoryPage = () => {
+  const { slug: categorySlug } = useParams();
   const [category, setCategory] = useState<Category | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [status, setStatus] = useState<"loading" | "success" | "error">(

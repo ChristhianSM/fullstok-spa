@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import styles from "./styles.module.css";
 import { type ComponentPropsWithRef } from "react";
+import { Link } from "react-router";
 
 type PropsBaseButton = {
   variant?: "secondary" | "outline" | "ghost";
@@ -29,6 +30,14 @@ export const Button = ({
   );
 
   if (typeof delegated.href === "string") {
+    const { href, ...rest } = delegated;
+
+    // Ruta interna
+    if (href.startsWith("/")) {
+      return <Link to={href} className={buttonClassName} {...rest} />;
+    }
+
+    // Ruta externa: http://...
     return <a className={buttonClassName} {...delegated}></a>;
   }
 

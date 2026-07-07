@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
 
@@ -30,14 +31,14 @@ export const AuthNav = ({ user }: AuthNavProps) => {
             ) : (
               <>
                 <li className={styles["auth-nav__item"]}>
-                  <a href="/login" className={styles["auth-nav__link"]}>
+                  <Link to="/login" className={styles["auth-nav__link"]}>
                     Iniciar sesión{" "}
-                  </a>
+                  </Link>
                 </li>
                 <li className={styles["auth-nav__item"]}>
-                  <a href="/signup" className={styles["auth-nav__link"]}>
+                  <Link to="/signup" className={styles["auth-nav__link"]}>
                     Crear una cuenta{" "}
-                  </a>
+                  </Link>
                 </li>
               </>
             )}

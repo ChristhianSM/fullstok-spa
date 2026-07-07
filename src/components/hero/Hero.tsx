@@ -1,9 +1,9 @@
+import { useNavigate } from "react-router";
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
-import { useNavigation } from "../router-provider";
 
 export const Hero = () => {
-  const navigate = useNavigation();
+  const navigate = useNavigate();
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
