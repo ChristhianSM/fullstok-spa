@@ -5,6 +5,10 @@
   background-color: var(--background);
 }
 
+.root__main {
+
+}
+
 .root__header {
   position: sticky;
   top: 0;

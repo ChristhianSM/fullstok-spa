@@ -1,36 +1,52 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 export const MainNav = () => {
   return (
     <nav aria-label="Navegación principal" className={styles["main-nav"]}>
       <ul className={styles["main-nav__list"]} role="menubar">
         <li className={styles["main-nav__item"]} role="none">
-          <Link
+          <NavLink
             to="/categories/polos"
             role="menuitem"
-            className={styles["main-nav__link"]}
+            className={({ isActive }) =>
+              clsx(
+                styles["main-nav__link"],
+                isActive && styles["main-nav__link--active"],
+              )
+            }
           >
             Polos
-          </Link>
+          </NavLink>
         </li>
         <li className={styles["main-nav__item"]} role="none">
-          <Link
+          <NavLink
             to="/categories/tazas"
             role="menuitem"
-            className={styles["main-nav__link"]}
+            className={({ isActive }) =>
+              clsx(
+                styles["main-nav__link"],
+                isActive && styles["main-nav__link--active"],
+              )
+            }
           >
             Tazas
-          </Link>
+          </NavLink>
         </li>
         <li className={styles["main-nav__item"]} role="none">
-          <Link
+          <NavLink
             to="/categories/stickers"
             role="menuitem"
-            className={styles["main-nav__link"]}
+            className={({ isActive }) =>
+              clsx(
+                styles["main-nav__link"],
+                isActive && styles["main-nav__link--active"],
+              )
+            }
           >
             Stickers
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>

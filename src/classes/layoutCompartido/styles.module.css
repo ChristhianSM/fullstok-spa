@@ -1,0 +1,7 @@
+.shell__nav {
+  color: white;
+}
+
+.shell__nav--active {
+  background-color: red;
+}
