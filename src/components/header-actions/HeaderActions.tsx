@@ -1,12 +1,13 @@
+import { useCart } from "../cart-provider";
 import ThemeToggler from "../theme-toggler";
 import { Button } from "../ui";
 import styles from "./styles.module.css";
 
-type HeaderMainProps = {
-  cartItemsCount: number;
-};
+export const HeaderActions = () => {
+  const { cart } = useCart();
 
-export const HeaderActions = ({ cartItemsCount }: HeaderMainProps) => {
+  const cartItemsCount = cart?.totalQuantity ?? 0;
+
   return (
     <div className={styles["header-actions"]}>
       <ThemeToggler />

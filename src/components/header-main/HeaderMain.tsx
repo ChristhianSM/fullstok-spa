@@ -4,11 +4,7 @@ import MainNav from "../main-nav";
 import { Container, Separator } from "../ui";
 import styles from "./styles.module.css";
 
-type HeaderMainProps = {
-  cartItemsCount: number;
-};
-
-export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
+export const HeaderMain = () => {
   return (
     <Container className={styles["header-main"]}>
       <div className={styles["header-main__top"]}>
@@ -20,7 +16,7 @@ export const HeaderMain = ({ cartItemsCount }: HeaderMainProps) => {
             height="32"
           />
         </Link>
-        <HeaderActions cartItemsCount={cartItemsCount} />
+        <HeaderActions />
       </div>
       <Separator className={styles["header-main__separator"]} />
       <MainNav />

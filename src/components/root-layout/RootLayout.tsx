@@ -8,7 +8,6 @@ export const RootLayout = () => {
     <div className={styles.root}>
       <Header
         user={{ email: "Christhian" }}
-        cartItemsCount={10}
         className={styles["root__header"]}
       />
       <main className={styles["root-main"]}>

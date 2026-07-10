@@ -21,3 +21,23 @@ export type Product = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CartItem = {
+  id: number;
+  quantity: number;
+  lineTotal: number;
+  product: {
+    id: number;
+    title: string;
+    slug: string;
+    price: number;
+    imgSrc: number;
+  }
+}
+
+export type Cart = {
+  id: number;
+  items:  CartItem[];
+  totalQuantity: number;
+  totalPrice: number;
+}

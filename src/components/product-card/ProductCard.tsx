@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Product } from "../../types";
 import styles from "./style.module.css";
 
@@ -6,9 +7,9 @@ type ProductCardProps = {
 };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const { id, title, description, price, imgSrc } = product;
+  const { slug, title, description, price, imgSrc } = product;
   return (
-    <a href={`/product/${id}`} className={styles["product-card"]}>
+    <Link to={`/product/${slug}`} className={styles["product-card"]}>
       <div className={styles["product-card__container"]}>
         <div className={styles["product-card__image-container"]}>
           <img
@@ -25,7 +26,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
