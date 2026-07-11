@@ -28,3 +28,10 @@ export async function updateCartItem ( itemId: number, quantity: number) {
     body: JSON.stringify({quantity})
   })
 }
+
+export async function removeCartItem ( itemId: number) {
+  return request<void>(`cart/items/${itemId}`, {
+    method: "DELETE",
+    credentials: "include",
+  })
+}

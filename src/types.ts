@@ -31,7 +31,7 @@ export type CartItem = {
     title: string;
     slug: string;
     price: number;
-    imgSrc: number;
+    imgSrc: string;
   }
 }
 

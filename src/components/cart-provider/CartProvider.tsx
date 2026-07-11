@@ -1,7 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { Cart } from "../../types";
 import { CartContext } from "./cartContext";
-import { addCartItem, getCart, updateCartItem } from "../../services";
+import {
+  addCartItem,
+  getCart,
+  removeCartItem,
+  updateCartItem,
+} from "../../services";
 
 type CartProviderProps = {
   children: ReactNode;
@@ -28,6 +33,16 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(await getCart());
   }
 
+  async function updateItem(itemId: number, quantity: number) {
+    await updateCartItem(itemId, quantity);
+    setCart(await getCart());
+  }
+
+  async function removeItem(itemId: number) {
+    await removeCartItem(itemId);
+    setCart(await getCart());
+  }
+
   useEffect(() => {
     async function runEffect() {
       try {
@@ -44,7 +59,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ cart, status, addItem }}>
+    <CartContext.Provider
+      value={{ cart, status, addItem, updateItem, removeItem }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -34,7 +34,7 @@
 /* @import "3_components/price-filter.css" layer(components); */
 /* @import "3_components/product-card.css" layer(components); */
 /* @import "3_components/product.css" layer(components); */
-@import "3_components/cart.css" layer(components);
+/* @import "3_components/cart.css" layer(components); */
 @import "3_components/checkout.css" layer(components);
 @import "3_components/order-confirmation.css" layer(components);
 @import "3_components/prose.css" layer(components);
