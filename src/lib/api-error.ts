@@ -1,4 +1,4 @@
-import type { FieldErrors } from "./api-client";
+export type FieldErrors = Record<string, string[]>;
 
 export class ApiError extends Error {
   readonly status: number;

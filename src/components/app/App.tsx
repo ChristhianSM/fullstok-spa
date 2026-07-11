@@ -7,6 +7,8 @@ import NotFoundPage from "../../pages/not-found-page";
 import CartPage from "../../pages/cart-page";
 import CheckoutPage from "../../pages/checkout-page";
 import OrderConfirmationPage from "../../pages/order-confirmation-page";
+import LoginPage from "../../pages/login-page";
+import SignupPage from "../../pages/signup-page";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -1,0 +1,20 @@
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input__field {
+  padding-right: 2.5rem;
+}
+
+.password-input__toggle {
+  position: absolute;
+  right: 0.375rem;
+}
+
+/* El tema lo manda la clase de <html> (la pone el ThemeToggler), no la
+   preferencia del sistema: por eso el ícono se invierte con `html.dark`. */
+:global(html.dark) .password-input__toggle img {
+  filter: invert(1);
+}

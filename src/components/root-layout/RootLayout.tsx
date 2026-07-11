@@ -6,10 +6,7 @@ import { Outlet } from "react-router";
 export const RootLayout = () => {
   return (
     <div className={styles.root}>
-      <Header
-        user={{ email: "Christhian" }}
-        className={styles["root__header"]}
-      />
+      <Header className={styles["root__header"]} />
       <main className={styles["root-main"]}>
         <Outlet />
       </main>

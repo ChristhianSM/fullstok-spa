@@ -1,12 +1,11 @@
 import { Link } from "react-router";
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
+import { useAuth } from "../auth-provider/useAuth";
 
-type AuthNavProps = {
-  user: { email: string } | null;
-};
+export const AuthNav = () => {
+  const { user, logout } = useAuth();
 
-export const AuthNav = ({ user }: AuthNavProps) => {
   return (
     <div className={styles["auth-nav"]}>
       <Container className={styles["auth-nav__container"]}>
@@ -18,26 +17,25 @@ export const AuthNav = ({ user }: AuthNavProps) => {
                   Bienvenido {user.email}
                 </li>
                 <li className={styles["auth-nav__item"]}>
-                  <form action="/logout" method="POST">
-                    <Button
-                      variant="ghost"
-                      className={styles["auth-nav__button"]}
-                    >
-                      Cerrar sesión
-                    </Button>
-                  </form>
+                  <Button
+                    variant="ghost"
+                    className={styles["auth-nav__button"]}
+                    onClick={logout}
+                  >
+                    Cerrar sesión
+                  </Button>
                 </li>
               </>
             ) : (
               <>
                 <li className={styles["auth-nav__item"]}>
                   <Link to="/login" className={styles["auth-nav__link"]}>
-                    Iniciar sesión{" "}
+                    Iniciar sesión
                   </Link>
                 </li>
                 <li className={styles["auth-nav__item"]}>
                   <Link to="/signup" className={styles["auth-nav__link"]}>
-                    Crear una cuenta{" "}
+                    Crear una cuenta
                   </Link>
                 </li>
               </>

@@ -1,7 +1,5 @@
 import { BASE_URL } from "../config";
-import { ApiError } from "./api-error";
-
-export type FieldErrors = Record<string, string[]>;
+import { ApiError, type FieldErrors } from "./api-error";
 
 type ApiSuccess<T> = { data: T };
 type ApiFailure = { error: string; fields?: FieldErrors };

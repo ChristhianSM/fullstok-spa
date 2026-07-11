@@ -89,3 +89,10 @@ export type Order = {
 
 // GET /orders/:id devuelve la orden hidratada con sus items.
 export type OrderWithItems = Order & { items: OrderItem[] };
+
+export type User = {
+  id: number;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
