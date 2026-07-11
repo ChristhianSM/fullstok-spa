@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router";
 import { Container, Section } from "../../components/ui";
 import { getOrder } from "../../services";
-import type { OrderWithItems, Status } from "../../types";
+import type { OrderWithItems } from "../../types";
 import styles from "./styles.module.css";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function OrderConfirmationPage() {
   const [searchParams] = useSearchParams();
   const orderId = Number(searchParams.get("orderId"));
 
-  const [order, setOrder] = useState<OrderWithItems | null>(null);
-  const [status, setStatus] = useState<Status>("loading");
-
-  useEffect(() => {
-    if (!orderId) return;
-
-    async function runEffect() {
-      try {
-        setOrder(await getOrder(orderId));
-        setStatus("success");
-      } catch (error) {
-        console.error(error);
-        setStatus("error");
-      }
-    }
-
-    runEffect();
+  const { data: order, status } = useFetch<OrderWithItems | null>(async () => {
+    if (!orderId) return null;
+    return getOrder(orderId);
   }, [orderId]);
 
   if (!orderId) {

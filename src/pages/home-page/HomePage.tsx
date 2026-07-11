@@ -1,33 +1,15 @@
 import styles from "./styles.module.css";
-
-import { useEffect, useState } from "react";
-
-import type { Category, Status } from "../../types";
-
+import type { Category } from "../../types";
 import { getCategories } from "../../services";
 import Hero from "../../components/hero";
 import { Container } from "../../components/ui";
 import Categories from "../../components/categories";
 import Features from "../../components/features";
+import { useFetch } from "../../hooks/useFetch";
 
 export const HomePage = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [status, setStatus] = useState<Status>("loading");
-
-  useEffect(() => {
-    async function runEffect() {
-      try {
-        const categoriesData = await getCategories();
-        setCategories(categoriesData);
-        setStatus("success");
-      } catch (error) {
-        console.log(error);
-        setStatus("error");
-      }
-    }
-
-    runEffect();
-  }, []);
+  const { data, status } = useFetch<Category[]>(getCategories, []);
+  const categories = data || [];
 
   return (
     <>

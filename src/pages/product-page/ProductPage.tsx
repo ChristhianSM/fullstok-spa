@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
-import type { Product } from "../../types";
+import { useState } from "react";
 import { getProduct } from "../../services";
 import { useCart } from "../../components/cart-provider";
 import { Button, Container, Separator } from "../../components/ui";
+import { useFetch } from "../../hooks/useFetch";
 
 export const ProductPage = () => {
   const { slug } = useParams();
@@ -12,24 +12,7 @@ export const ProductPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [addError, setAddError] = useState<string | null>(null);
 
-  const [product, setProduct] = useState<Product | null>(null);
-  const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading",
-  );
-
-  useEffect(() => {
-    async function getProductBySlug() {
-      try {
-        const productData = await getProduct(slug!);
-        setProduct(productData);
-        setStatus("success");
-      } catch (error) {
-        console.log(error);
-        setStatus("error");
-      }
-    }
-    getProductBySlug();
-  }, [slug]);
+  const { data: product, status } = useFetch(() => getProduct(slug!), [slug]);
 
   async function handleAddToCart() {
     if (product === null) return;

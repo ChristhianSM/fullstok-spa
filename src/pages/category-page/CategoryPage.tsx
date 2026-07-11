@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
-import type { Category, Product } from "../../types";
 import styles from "./styles.module.css";
 import { useParams, useSearchParams } from "react-router";
 import { getCategory, getProductsByCategory } from "../../services";
 import { Container } from "../../components/ui";
 import PriceFilter from "../../components/price-filter";
 import ProductCard from "../../components/product-card/ProductCard";
+import { useFetch } from "../../hooks/useFetch";
 
 export const CategoryPage = () => {
   const { slug: categorySlug } = useParams();
-  const [category, setCategory] = useState<Category | null>(null);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading",
+
+  const { data, status } = useFetch(
+    async () =>
+      Promise.all([
+        getCategory(categorySlug!),
+        getProductsByCategory(categorySlug!),
+      ]),
+    [categorySlug],
   );
+
+  const [category, products] = data ?? [null, []];
 
   // Estado para manejar los filtros
   const [searchParams, setSearchParams] = useSearchParams();
@@ -55,26 +60,6 @@ export const CategoryPage = () => {
 
     setSearchParams(nextParams);
   }
-
-  useEffect(() => {
-    async function runEffect() {
-      try {
-        const [categoryData, productsData] = await Promise.all([
-          getCategory(categorySlug!),
-          getProductsByCategory(categorySlug!),
-        ]);
-
-        setCategory(categoryData);
-        setProducts(productsData);
-        setStatus("success");
-      } catch (error) {
-        console.log(error);
-        setStatus("error");
-      }
-    }
-
-    runEffect();
-  }, [categorySlug]);
 
   if (status === "error") {
     return (

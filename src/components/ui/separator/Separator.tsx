@@ -1,4 +1,4 @@
-import React, { type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
