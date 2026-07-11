@@ -6,16 +6,18 @@ import type { ShippingInfo } from "../../types";
 import { COUNTRIES, SHIPPING_FIELDS } from "./fields";
 import styles from "./styles.module.css";
 import { useState, type SubmitEvent } from "react";
-import type { FieldErrors } from "../../lib/api-client";
+import type { FieldErrors } from "../../lib/api-error";
 import { ApiError } from "../../lib/api-error";
 import { clsx } from "clsx";
+import { useAuth } from "../../components/auth-provider";
 
 export default function CheckoutPage() {
-  const { cart, status, refresh } = useCart();
+  const { cart, status: cartStatus, refresh } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { user, status: authStatus } = useAuth();
 
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -59,7 +61,7 @@ export default function CheckoutPage() {
     }
   }
 
-  if (status === "error") {
+  if (cartStatus === "error" || authStatus === "error") {
     return (
       <Section>
         <Container>
@@ -71,7 +73,7 @@ export default function CheckoutPage() {
     );
   }
 
-  if (status === "loading") {
+  if (cartStatus === "loading" || authStatus === "loading") {
     return null;
   }
 
@@ -148,6 +150,8 @@ export default function CheckoutPage() {
                   type="email"
                   autoComplete="email"
                   required
+                  defaultValue={user?.email ?? ""}
+                  readOnly={user !== null}
                 />
                 {fieldErrors?.email && (
                   <span className="input-field__error">

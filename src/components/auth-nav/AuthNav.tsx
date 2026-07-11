@@ -2,9 +2,22 @@ import { Link } from "react-router";
 import { Button, Container } from "../ui";
 import styles from "./styles.module.css";
 import { useAuth } from "../auth-provider/useAuth";
+import { useState } from "react";
 
 export const AuthNav = () => {
   const { user, logout } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  }
 
   return (
     <div className={styles["auth-nav"]}>
@@ -20,9 +33,10 @@ export const AuthNav = () => {
                   <Button
                     variant="ghost"
                     className={styles["auth-nav__button"]}
-                    onClick={logout}
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
                   >
-                    Cerrar sesión
+                    {isLoggingOut ? "Cerrando sesión..." : "Cerrar sesión"}
                   </Button>
                 </li>
               </>

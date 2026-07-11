@@ -7,6 +7,7 @@ import {
   removeCartItem,
   updateCartItem,
 } from "../../services";
+import { useAuth } from "../auth-provider";
 
 type CartProviderProps = {
   children: ReactNode;
@@ -17,6 +18,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading",
   );
+  const { user } = useAuth();
+
+  const userId = user?.id ?? null;
 
   async function refresh() {
     setCart(await getCart());
@@ -60,7 +64,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
 
     runEffect();
-  }, []);
+  }, [userId]);
 
   return (
     <CartContext.Provider
