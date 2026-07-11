@@ -18,6 +18,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     "loading",
   );
 
+  async function refresh() {
+    setCart(await getCart());
+  }
+
   async function addItem(productId: number) {
     // Verificacmos si el producto se encuentra en nuestro carrito de compras;
     const exitingItem = cart?.items.find(
@@ -30,17 +34,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       await addCartItem(productId, 1);
     }
 
-    setCart(await getCart());
+    refresh();
   }
 
   async function updateItem(itemId: number, quantity: number) {
     await updateCartItem(itemId, quantity);
-    setCart(await getCart());
+    refresh();
   }
 
   async function removeItem(itemId: number) {
     await removeCartItem(itemId);
-    setCart(await getCart());
+    refresh();
   }
 
   useEffect(() => {
@@ -60,7 +64,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, status, addItem, updateItem, removeItem }}
+      value={{ cart, status, addItem, updateItem, removeItem, refresh }}
     >
       {children}
     </CartContext.Provider>

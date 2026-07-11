@@ -32,14 +32,60 @@ export type CartItem = {
     slug: string;
     price: number;
     imgSrc: string;
-  }
-}
+  };
+};
 
 export type Cart = {
   id: number;
-  items:  CartItem[];
+  items: CartItem[];
   totalQuantity: number;
   totalPrice: number;
-}
+};
 
 export type Status = "idle" | "loading" | "success" | "error";
+
+export type ShippingInfo = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  company?: string;
+  address: string;
+  city: string;
+  country: string;
+  region: string;
+  zipCode: string;
+  phone: string;
+};
+
+export type OrderItem = {
+  id: number;
+  orderId: number;
+  productId: number | null;
+  title: string;
+  price: number;
+  imgSrc: string;
+  quantity: number;
+  createdAt: Date;
+};
+
+export type Order = {
+  id: number;
+  userId: number | null;
+  email: string;
+  firstName: string;
+  lastName: string;
+  company: string | null;
+  address: string;
+  city: string;
+  country: string;
+  region: string;
+  zipCode: string;
+  phone: string;
+  total: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+// GET /orders/:id devuelve la orden hidratada con sus items.
+export type OrderWithItems = Order & { items: OrderItem[] };
