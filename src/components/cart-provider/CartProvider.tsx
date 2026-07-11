@@ -1,19 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { BASE_URL } from "../../config";
 import type { Cart } from "../../types";
 import { CartContext } from "./cartContext";
-
-async function getCart(): Promise<Cart | null> {
-  const response = await fetch(`${BASE_URL}/cart`, { credentials: "include" });
-
-  if (response.status === 404) return null;
-
-  const body = await response.json();
-
-  if (!response.ok) throw new Error(body.error);
-
-  return body.data;
-}
+import { addCartItem, getCart, updateCartItem } from "../../services";
 
 type CartProviderProps = {
   children: ReactNode;
@@ -31,23 +19,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       (item) => item.product.id === productId,
     ); // Te trae el producto con el id 7 o null;
 
-    const url = exitingItem
-      ? `${BASE_URL}/cart/items/${exitingItem.id}`
-      : `${BASE_URL}/cart/items`;
-    const method = exitingItem ? "PATCH" : "POST";
-    const body = exitingItem
-      ? { quantity: exitingItem.quantity + 1 }
-      : { productId, quantity: 1 };
-
-    const response = await fetch(url, {
-      method,
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error);
+    if (exitingItem) {
+      await updateCartItem(exitingItem.id, exitingItem.quantity + 1);
+    } else {
+      await addCartItem(productId, 1);
+    }
 
     setCart(await getCart());
   }
@@ -55,10 +31,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   useEffect(() => {
     async function runEffect() {
       try {
-        setTimeout(async () => {
-          setCart(await getCart());
-          setStatus("success");
-        }, 3000);
+        const cartData = await getCart();
+        setCart(cartData);
+        setStatus("success");
       } catch (error) {
         console.log(error);
         setStatus("error");

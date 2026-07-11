@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import type { Category, Product } from "../../types";
-import PriceFilter from "../price-filter";
-import ProductCard from "../product-card/ProductCard";
-import { Container } from "../ui";
 import styles from "./styles.module.css";
-import { BASE_URL } from "../../config";
 import { useParams, useSearchParams } from "react-router";
+import { getCategory, getProductsByCategory } from "../../services";
+import { Container } from "../../components/ui";
+import PriceFilter from "../../components/price-filter";
+import ProductCard from "../../components/product-card/ProductCard";
 
 export const CategoryPage = () => {
   const { slug: categorySlug } = useParams();
@@ -59,19 +59,13 @@ export const CategoryPage = () => {
   useEffect(() => {
     async function runEffect() {
       try {
-        const [categoryResponse, productsResponse] = await Promise.all([
-          fetch(`${BASE_URL}/categories/${categorySlug}`),
-          fetch(`${BASE_URL}/categories/${categorySlug}/products`),
+        const [categoryData, productsData] = await Promise.all([
+          getCategory(categorySlug!),
+          getProductsByCategory(categorySlug!),
         ]);
 
-        const bodyCategory = await categoryResponse.json();
-        const bodyProducts = await productsResponse.json();
-
-        if (!categoryResponse.ok) throw new Error(bodyCategory.error);
-        if (!productsResponse.ok) throw new Error(bodyProducts.error);
-
-        setCategory(bodyCategory.data);
-        setProducts(bodyProducts.data);
+        setCategory(categoryData);
+        setProducts(productsData);
         setStatus("success");
       } catch (error) {
         console.log(error);

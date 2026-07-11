@@ -41,3 +41,5 @@ export type Cart = {
   totalQuantity: number;
   totalPrice: number;
 }
+
+export type Status = "idle" | "loading" | "success" | "error";

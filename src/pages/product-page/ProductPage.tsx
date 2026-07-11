@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
-import { Button, Container, Separator } from "../ui";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import type { Product } from "../../types";
-import { BASE_URL } from "../../config";
-import { useCart } from "../cart-provider";
+import { getProduct } from "../../services";
+import { useCart } from "../../components/cart-provider";
+import { Button, Container, Separator } from "../../components/ui";
 
 export const ProductPage = () => {
   const { slug } = useParams();
@@ -20,13 +20,8 @@ export const ProductPage = () => {
   useEffect(() => {
     async function getProductBySlug() {
       try {
-        const response = await fetch(`${BASE_URL}/products/${slug}`);
-
-        const body = await response.json();
-
-        if (!response.ok) throw new Error(body.error);
-
-        setProduct(body.data);
+        const productData = await getProduct(slug!);
+        setProduct(productData);
         setStatus("success");
       } catch (error) {
         console.log(error);

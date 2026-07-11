@@ -1,34 +1,32 @@
 import styles from "./styles.module.css";
 
 import { useEffect, useState } from "react";
-import Categories from "../categories";
-import Features from "../features";
-import Hero from "../hero";
-import type { Category } from "../../types";
-import { GET_CATEGORIES_URL } from "../../config";
-import { Container } from "../ui";
+
+import type { Category, Status } from "../../types";
+
+import { getCategories } from "../../services";
+import Hero from "../../components/hero";
+import { Container } from "../../components/ui";
+import Categories from "../../components/categories";
+import Features from "../../components/features";
 
 export const HomePage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("loading");
+  const [status, setStatus] = useState<Status>("loading");
 
   useEffect(() => {
-    async function getCategories() {
+    async function runEffect() {
       try {
-        const response = await fetch(GET_CATEGORIES_URL);
-        if (!response.ok) throw new Error("Ocurrio un Problema");
-        const { data } = await response.json();
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
         setStatus("success");
-        setCategories(data);
       } catch (error) {
-        setStatus("error");
         console.log(error);
+        setStatus("error");
       }
     }
 
-    getCategories();
+    runEffect();
   }, []);
 
   return (
